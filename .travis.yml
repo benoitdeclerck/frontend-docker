@@ -1,8 +1,8 @@
-language: node_js
+sudo: required
+language: nodejs
 node_js:
   - 12
 
-sudo: required
 services:
   - docker
 
@@ -11,3 +11,17 @@ before_install:
 
 script:
   - docker run -e CI=true benoitdeclerck/frontend-docker npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-197962664988"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+  edge: true
