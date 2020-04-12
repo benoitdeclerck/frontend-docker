@@ -1,7 +1,5 @@
 sudo: required
-language: nodejs
-node_js:
-  - 12
+language: generic
 
 services:
   - docker
