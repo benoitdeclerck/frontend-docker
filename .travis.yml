@@ -1,7 +1,5 @@
 sudo: required
-language: nodejs
-node_js:
-  - 12
+language: generic
 
 services:
   - docker
@@ -13,6 +11,7 @@ script:
   - docker run -e CI=true benoitdeclerck/frontend-docker npm run test
 
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: "eu-central-1"
   app: "docker"
@@ -24,4 +23,3 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
     secure: "$AWS_SECRET_KEY"
-  edge: true
