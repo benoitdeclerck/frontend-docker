@@ -1,6 +1,6 @@
 # Build Phase
 
-FROM node:alpine AS builder
+FROM node:alpine
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ FROM nginx
 
 EXPOSE 80
 
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
 
 # Default command for nginx image will start up the container
 # So no command necessary here
